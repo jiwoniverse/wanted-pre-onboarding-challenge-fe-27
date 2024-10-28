@@ -79,7 +79,7 @@ const LoginForm = () => {
 				</FormProvider>
 			</Fieldset.Root>
 			<Card.Footer padding="0">
-				<Button onClick={() => navigate("/signup")} variant="plain">
+				<Button onClick={() => navigate("/auth/signup")} variant="plain">
 					계정이 없으신가요?
 				</Button>
 			</Card.Footer>

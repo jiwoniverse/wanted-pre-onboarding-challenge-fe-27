@@ -78,7 +78,7 @@ const SignUpForm = () => {
 				</FormProvider>
 			</Fieldset.Root>
 			<Card.Footer padding="0">
-				<Button onClick={() => navigate("/login")} variant="plain">
+				<Button onClick={() => navigate("/auth/login")} variant="plain">
 					이미 가입되어 있으신가요?
 				</Button>
 			</Card.Footer>
