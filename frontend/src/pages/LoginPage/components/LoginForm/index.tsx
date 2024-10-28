@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useTransition } from "react";
 
 import * as z from "zod";
@@ -7,12 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/shared/schema";
 import { login } from "@/shared/lib/auth";
 
-import { FormError } from "@/pages/AuthPage/components/FormError";
+import { FormError } from "@/pages/LoginPage/components/FormError";
 import { Card, Button, Fieldset, Input, Stack } from "@chakra-ui/react";
 import { Field } from "@/shared/components/ui/field";
 import * as S from "./styles";
 
 const LoginForm = () => {
+	const navigate = useNavigate();
 	const [error, setError] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
 
@@ -30,7 +32,11 @@ const LoginForm = () => {
 
 		startTransition(() => {
 			login(values).then((data) => {
-				setError(data.error);
+				if (data.success) {
+					navigate("/todo-list");
+				} else {
+					setError(data.error);
+				}
 			});
 		});
 	};
@@ -46,7 +52,6 @@ const LoginForm = () => {
 				<FormProvider {...methods}>
 					<S.Form onSubmit={methods.handleSubmit(onSubmit)}>
 						{" "}
-						{/* form 태그로 변경 */}
 						<Field label="이메일">
 							<Input
 								{...methods.register("email")}
@@ -66,7 +71,7 @@ const LoginForm = () => {
 							type="submit"
 							disabled={!methods.formState.isValid || isPending}
 							width="full"
-							alignSelf="flex-start"
+							marginTop="3"
 						>
 							로그인
 						</Button>
@@ -74,7 +79,9 @@ const LoginForm = () => {
 				</FormProvider>
 			</Fieldset.Root>
 			<Card.Footer padding="0">
-				<Button variant="plain">계정이 없으신가요?</Button>
+				<Button onClick={() => navigate("/signup")} variant="plain">
+					계정이 없으신가요?
+				</Button>
 			</Card.Footer>
 		</Card.Root>
 	);
