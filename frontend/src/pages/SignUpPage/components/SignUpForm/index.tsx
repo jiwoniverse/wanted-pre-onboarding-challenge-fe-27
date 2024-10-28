@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "@/shared/schema";
 import { signUp } from "@/shared/lib/auth";
 
-import { FormError } from "@/pages/LoginPage/components/FormError";
+import { FormError } from "@/shared/components/common/FormError";
 import { Card, Button, Fieldset, Input, Stack } from "@chakra-ui/react";
 import { Field } from "@/shared/components/ui/field";
 import * as S from "./styles";
