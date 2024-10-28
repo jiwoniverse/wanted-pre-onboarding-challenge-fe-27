@@ -1,6 +1,6 @@
 import createApiErrorMessage from "./apiErrorMessageCreator";
 
-import { LoginRequest, LoginResponse } from "@/shared/types";
+import { LoginRequest, LoginResponse, SignUpRequest, SignUpResponse } from "@/shared/types";
 
 export const postLogin = async (loginRequest: LoginRequest): Promise<LoginResponse> => {
 	const response = await fetch("http://localhost:8080/users/login", {
@@ -12,7 +12,28 @@ export const postLogin = async (loginRequest: LoginRequest): Promise<LoginRespon
 	});
 
 	if (!response.ok) {
-		throw new Error(createApiErrorMessage(response.status));
+		const errorData = await response.json();
+		const errorMessage = errorData.details || createApiErrorMessage(response.status);
+		throw new Error(errorMessage);
+	}
+
+	const data = await response.json();
+	return data;
+};
+
+export const postSignUp = async (signUpRequest: SignUpRequest): Promise<SignUpResponse> => {
+	const response = await fetch("http://localhost:8080/users/create", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(signUpRequest),
+	});
+
+	if (!response.ok) {
+		const errorData = await response.json();
+		const errorMessage = errorData.details || createApiErrorMessage(response.status);
+		throw new Error(errorMessage);
 	}
 
 	const data = await response.json();
