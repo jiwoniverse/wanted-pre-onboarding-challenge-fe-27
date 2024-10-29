@@ -8,9 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "@/shared/schema";
 import { signUp } from "@/shared/lib/auth";
 
-import { FormError } from "@/shared/components/common/FormError";
-import { Card, Button, Fieldset, Input, Stack } from "@chakra-ui/react";
+import { Card, Button, Fieldset, Input, Stack, Heading } from "@chakra-ui/react";
 import { Field } from "@/shared/components/ui/field";
+import { Alert } from "@/shared/components/ui/alert";
 import * as S from "./styles";
 
 const SignUpForm = () => {
@@ -33,7 +33,7 @@ const SignUpForm = () => {
 		startTransition(() => {
 			signUp(values).then((data) => {
 				if (data.success) {
-					navigate("/todo-list");
+					navigate("/");
 				} else {
 					setError(data.error);
 				}
@@ -42,11 +42,20 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<Card.Root width="600px" display="flex" alignItems="center" padding="6" gapY="4">
+		<Card.Root
+			width="100%"
+			maxWidth="600px"
+			display="flex"
+			alignItems="center"
+			padding="6"
+			gapY="4"
+		>
 			<Fieldset.Root size="lg" maxW="md">
 				<Stack>
-					<Fieldset.Legend>가입하기</Fieldset.Legend>
-					<Fieldset.HelperText>회원가입 후 더 많은 정보를 확인해보세요.</Fieldset.HelperText>
+					<Fieldset.Legend>
+						<Heading>회원가입</Heading>
+					</Fieldset.Legend>
+					<Fieldset.HelperText>가입하고 더 많은 혜택을 살펴보세요.</Fieldset.HelperText>
 				</Stack>
 
 				<FormProvider {...methods}>
@@ -65,13 +74,8 @@ const SignUpForm = () => {
 								type="password"
 							/>
 						</Field>
-						<FormError message={error} />
-						<Button
-							type="submit"
-							disabled={!methods.formState.isValid || isPending}
-							width="full"
-							marginTop="3"
-						>
+						<Alert status="error" title={error} />
+						<Button type="submit" disabled={!methods.formState.isValid || isPending} width="full">
 							회원가입
 						</Button>
 					</S.Form>

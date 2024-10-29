@@ -8,9 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/shared/schema";
 import { login } from "@/shared/lib/auth";
 
-import { FormError } from "@/shared/components/common/FormError";
-import { Card, Button, Fieldset, Input, Stack } from "@chakra-ui/react";
+import { Card, Button, Fieldset, Input, Stack, Heading } from "@chakra-ui/react";
 import { Field } from "@/shared/components/ui/field";
+import { Alert } from "@/shared/components/ui/alert";
 import * as S from "./styles";
 
 const LoginForm = () => {
@@ -33,7 +33,7 @@ const LoginForm = () => {
 		startTransition(() => {
 			login(values).then((data) => {
 				if (data.success) {
-					navigate("/todo-list");
+					navigate("/");
 				} else {
 					setError(data.error);
 				}
@@ -42,10 +42,19 @@ const LoginForm = () => {
 	};
 
 	return (
-		<Card.Root width="600px" display="flex" alignItems="center" padding="6" gapY="4">
+		<Card.Root
+			width="100%"
+			maxWidth="600px"
+			display="flex"
+			alignItems="center"
+			padding="6"
+			gapY="4"
+		>
 			<Fieldset.Root size="lg" maxW="md">
 				<Stack>
-					<Fieldset.Legend>로그인 하기</Fieldset.Legend>
+					<Fieldset.Legend>
+						<Heading>로그인</Heading>
+					</Fieldset.Legend>
 					<Fieldset.HelperText>로그인하고 더 많은 정보를 확인해보세요.</Fieldset.HelperText>
 				</Stack>
 
@@ -66,13 +75,8 @@ const LoginForm = () => {
 								type="password"
 							/>
 						</Field>
-						<FormError message={error} />
-						<Button
-							type="submit"
-							disabled={!methods.formState.isValid || isPending}
-							width="full"
-							marginTop="3"
-						>
+						<Alert status="error" variant="surface" title={error} />
+						<Button type="submit" disabled={!methods.formState.isValid || isPending} width="full">
 							로그인
 						</Button>
 					</S.Form>

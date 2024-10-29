@@ -15,7 +15,3 @@ export const API_ERROR_MESSAGE: ApiErrorMessage = {
 export const SERVER_ERROR_REGEX = /^5\d{2}$/;
 
 export const ROUTE_ERROR_MESSAGE = "찾으시는 페이지가 없습니다.";
-
-export const INVALID_REVIEW_PASSWORD_MESSAGE = "올바르지 않은 비밀번호입니다.";
-
-export const ERROR_BOUNDARY_IGNORE_ERROR = "IgnoredError";

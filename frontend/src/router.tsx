@@ -4,18 +4,24 @@ import App from "./App";
 
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
+import PrivateRoute from "@/shared/components/common/PrivateRoute";
 import SignUpPage from "@/pages/SignUpPage";
-import TodoListPage from "./pages/TodoListPage";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
 		children: [
-			{ path: "", element: <HomePage /> },
+			{
+				path: "",
+				element: (
+					<PrivateRoute>
+						<HomePage />
+					</PrivateRoute>
+				),
+			},
 			{ path: "/auth/login", element: <LoginPage /> },
 			{ path: "/auth/signup", element: <SignUpPage /> },
-			{ path: "/todo-list", element: <TodoListPage /> },
 		],
 	},
 ]);
