@@ -53,7 +53,7 @@ const Header = () => {
 			>
 				<Heading size="md">To do list</Heading>
 				{isAuthRoute ? null : (
-					<Button onClick={handleLogout} disabled={isPending} variant="subtle">
+					<Button onClick={handleLogout} disabled={isPending} size="sm">
 						로그아웃
 					</Button>
 				)}

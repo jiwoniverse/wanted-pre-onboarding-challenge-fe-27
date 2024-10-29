@@ -17,3 +17,20 @@ export interface SignUpResponse {
 	message: string;
 	token: string;
 }
+
+export interface TodoItemType {
+	title: string;
+	content: string;
+	id: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface TodoListType {
+	data: TodoItemType[];
+}
+
+export interface CreateTodoRequest {
+	title: string;
+	content: string;
+}

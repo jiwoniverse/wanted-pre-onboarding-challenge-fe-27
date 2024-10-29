@@ -13,7 +13,7 @@ const LoginPage = () => {
 
 		if (successParam === "false") {
 			toaster.create({
-				title: "로그인 해주세요.",
+				title: "로그인이 필요한 페이지입니다.",
 				type: "warning",
 				id: "auth-error",
 			});
