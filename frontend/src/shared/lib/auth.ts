@@ -12,7 +12,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
 	try {
 		const response = await postLogin(values);
-		localStorage.setItem("user_token", response.token);
+		localStorage.setItem("access_token", response.token);
 		return { success: response.message };
 	} catch (error) {
 		if (error instanceof Error) {
@@ -24,6 +24,18 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 	}
 };
 
+export const logout = (): Promise<{ success?: string; error?: string }> => {
+	return new Promise((resolve) => {
+		try {
+			localStorage.removeItem("access_token");
+			resolve({ success: "로그아웃 되었습니다." });
+		} catch (error) {
+			console.log("Unexpected error:", error);
+			resolve({ error: "알 수 없는 오류가 발생했습니다." });
+		}
+	});
+};
+
 export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
 	const validatedFields = LoginSchema.safeParse(values);
 
@@ -33,7 +45,7 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
 
 	try {
 		const response = await postSignUp(values);
-		localStorage.setItem("user_token", response.token);
+		localStorage.setItem("access_token", response.token);
 		return { success: response.message };
 	} catch (error) {
 		if (error instanceof Error) {
