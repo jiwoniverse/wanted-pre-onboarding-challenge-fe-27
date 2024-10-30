@@ -9,5 +9,5 @@ yarn start # localhost:8080
 
 cd frontend
 yarn
-yarn dev # localhost:3000
+yarn dev # localhost:5173
 ```

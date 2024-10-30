@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { getTodo, createTodo } from "@/apis/todo";
 import { TodoItemType } from "@/shared/types";
@@ -9,9 +10,14 @@ import { Flex, Box, Button, Input, VStack } from "@chakra-ui/react";
 import { toaster } from "@/shared/components/ui/toaster";
 
 const HomePage = () => {
+	const navigate = useNavigate();
 	const [todos, setTodos] = useState<TodoItemType[] | null>(null);
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
+
+	useEffect(() => {
+		fetchTodos();
+	}, []);
 
 	const fetchTodos = async () => {
 		try {
@@ -22,10 +28,6 @@ const HomePage = () => {
 		}
 	};
 
-	useEffect(() => {
-		fetchTodos();
-	}, []);
-
 	const handleAddTodo = async (title: string, content: string) => {
 		try {
 			await createTodo({ title, content });
@@ -34,6 +36,8 @@ const HomePage = () => {
 				type: "success",
 				id: "create-to-do-success",
 			});
+			setTitle("");
+			setContent("");
 			fetchTodos();
 		} catch (error) {
 			console.log("할일 등록 에러", error);
@@ -51,7 +55,7 @@ const HomePage = () => {
 			gapY={4}
 			alignItems="center"
 			justifyContent="center"
-			maxWidth="600px"
+			maxWidth="800px"
 			width="100%"
 			flex={1}
 			flexGrow={1}
@@ -60,11 +64,13 @@ const HomePage = () => {
 				<Flex direction="column" width="100%" gapY={5}>
 					<VStack width="100%">
 						<Input
+							value={title}
 							onChange={(e) => setTitle(e.currentTarget.value)}
 							placeholder="할 일 제목"
 							variant="flushed"
 						/>
 						<Input
+							value={content}
 							onChange={(e) => setContent(e.currentTarget.value)}
 							placeholder="할 일 내용"
 							variant="flushed"
@@ -75,9 +81,14 @@ const HomePage = () => {
 					</Button>
 				</Flex>
 			</Box>
-			<Box width="100%" flex={1} flexGrow={1}>
-				<TodoList todos={todos} />
-			</Box>
+			<Flex direction="row" maxWidth="800px" width="100%" flex={1} flexGrow={1}>
+				<Box width="50%">
+					<TodoList todos={todos} onSelect={(id) => navigate(`/${id}`)} />
+				</Box>
+				<Box width="50%">
+					<Outlet />
+				</Box>
+			</Flex>
 		</Flex>
 	);
 };

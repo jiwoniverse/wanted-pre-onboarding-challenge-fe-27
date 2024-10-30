@@ -6,6 +6,7 @@ import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import PrivateRoute from "@/shared/components/common/PrivateRoute";
 import SignUpPage from "@/pages/SignUpPage";
+import TodoDetailPage from "@/pages/TodoDetailPage";
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +20,16 @@ const router = createBrowserRouter([
 						<HomePage />
 					</PrivateRoute>
 				),
+				children: [
+					{
+						path: ":id",
+						element: (
+							<PrivateRoute>
+								<TodoDetailPage />
+							</PrivateRoute>
+						),
+					},
+				],
 			},
 			{ path: "/auth/login", element: <LoginPage /> },
 			{ path: "/auth/signup", element: <SignUpPage /> },
