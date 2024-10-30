@@ -60,7 +60,6 @@ const LoginForm = () => {
 
 				<FormProvider {...methods}>
 					<S.Form onSubmit={methods.handleSubmit(onSubmit)}>
-						{" "}
 						<Field label="이메일">
 							<Input
 								{...methods.register("email")}

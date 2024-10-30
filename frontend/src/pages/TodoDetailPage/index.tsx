@@ -5,7 +5,8 @@ import { getTodoById } from "@/apis/todo";
 
 import { TodoItemType } from "@/shared/types";
 
-import { Box, Text } from "@chakra-ui/react";
+import dayjs from "dayjs";
+import { Box, Card, Text } from "@chakra-ui/react";
 
 const TodoDetailPage = () => {
 	const { id } = useParams();
@@ -15,6 +16,7 @@ const TodoDetailPage = () => {
 		if (id) {
 			fetchTodo();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
 	if (!id) {
@@ -31,8 +33,22 @@ const TodoDetailPage = () => {
 	};
 
 	return (
-		<Box width="50%" padding={6}>
-			<Text textStyle="sm">{todo ? todo.content : "할 일 정보를 불러오는 중입니다..."}</Text>
+		<Box width="100%" height="100%" paddingTop={11}>
+			<Card.Root
+				width="100%"
+				height="full"
+				maxHeight="fit-content"
+				display="flex"
+				alignItems="center"
+				padding="6"
+				gapY="4"
+			>
+				<Text textStyle="sm">{todo ? todo.content : "할 일 정보를 불러오는 중입니다..."}</Text>
+				<Card.Footer padding="0">
+					<Text textStyle="xs">등록일 {dayjs(todo?.createdAt).format("YYYY.MM.DD")}</Text>
+					<Text textStyle="xs">수정일 {dayjs(todo?.updatedAt).format("YYYY.MM.DD")}</Text>
+				</Card.Footer>
+			</Card.Root>
 		</Box>
 	);
 };

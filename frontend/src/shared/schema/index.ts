@@ -18,3 +18,8 @@ export const SignUpSchema = z.object({
 		.min(1, { message: "비밀번호를 입력해주세요" })
 		.min(8, { message: "비밀번호는 8자 이상으로 입력해주세요." }),
 });
+
+export const AddTodoSchema = z.object({
+	title: z.string().min(1, { message: "할 일 제목을 입력해주세요." }),
+	content: z.string().min(1, { message: "할 일 내용을 입력해주세요." }),
+});

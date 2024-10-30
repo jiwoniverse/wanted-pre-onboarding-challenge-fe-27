@@ -5,9 +5,14 @@ import { Box, Text, Table } from "@chakra-ui/react";
 interface TodoListProps {
 	todos: TodoItemType[] | null;
 	onSelect: (id: string) => void;
+	selectedId?: string;
 }
 
-const TodoList = ({ todos, onSelect }: TodoListProps & { onSelect: (id: string) => void }) => {
+const TodoList = ({
+	todos,
+	onSelect,
+	selectedId,
+}: TodoListProps & { onSelect: (id: string) => void }) => {
 	return (
 		<Box width="100%">
 			<Table.Root size="md" showColumnBorder width="100%">
@@ -23,8 +28,9 @@ const TodoList = ({ todos, onSelect }: TodoListProps & { onSelect: (id: string) 
 								key={todo.id}
 								onClick={() => onSelect(todo.id)}
 								cursor="pointer"
-								_hover={{ backgroundColor: "#e2f1ff" }}
+								_hover={{ backgroundColor: "#e7e7e7" }}
 								transition="all 0.2s ease"
+								bg={selectedId === todo.id ? "#e2efff" : "transparent"}
 							>
 								<Table.Cell>{todo.title}</Table.Cell>
 							</Table.Row>

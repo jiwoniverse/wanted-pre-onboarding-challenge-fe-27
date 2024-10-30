@@ -6,7 +6,8 @@ import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import PrivateRoute from "@/shared/components/common/PrivateRoute";
 import SignUpPage from "@/pages/SignUpPage";
-import TodoDetailPage from "@/pages/TodoDetailPage";
+import TodoListPage from "@/pages/TodoListPage";
+import TodoDetailPage from "./pages/TodoDetailPage";
 
 const router = createBrowserRouter([
 	{
@@ -15,9 +16,15 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "",
+				element: <HomePage />,
+			},
+			{ path: "/auth/login", element: <LoginPage /> },
+			{ path: "/auth/signup", element: <SignUpPage /> },
+			{
+				path: "/todo",
 				element: (
 					<PrivateRoute>
-						<HomePage />
+						<TodoListPage />
 					</PrivateRoute>
 				),
 				children: [
@@ -31,8 +38,6 @@ const router = createBrowserRouter([
 					},
 				],
 			},
-			{ path: "/auth/login", element: <LoginPage /> },
-			{ path: "/auth/signup", element: <SignUpPage /> },
 		],
 	},
 ]);
