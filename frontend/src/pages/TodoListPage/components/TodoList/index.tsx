@@ -8,11 +8,7 @@ interface TodoListProps {
 	selectedId?: string;
 }
 
-const TodoList = ({
-	todos,
-	onSelect,
-	selectedId,
-}: TodoListProps & { onSelect: (id: string) => void }) => {
+const TodoList = ({ todos, onSelect, selectedId }: TodoListProps) => {
 	return (
 		<Box width="100%">
 			<Table.Root size="md" showColumnBorder width="100%">
