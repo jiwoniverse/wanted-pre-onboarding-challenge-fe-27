@@ -61,7 +61,7 @@ const HomePage = () => {
 			flexGrow={1}
 		>
 			<Box width="100%" paddingY={2} display="flex" alignItems="center" justifyContent="flex-start">
-				<Flex direction="column" width="100%" gapY={5}>
+				<Flex direction="column" width="50%" gapY={5}>
 					<VStack width="100%">
 						<Input
 							value={title}
