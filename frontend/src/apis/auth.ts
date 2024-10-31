@@ -1,9 +1,10 @@
 import createApiErrorMessage from "./apiErrorMessageCreator";
 
 import { LoginRequest, LoginResponse, SignUpRequest, SignUpResponse } from "@/shared/types";
+import { BASE_URL } from "./http";
 
 export const postLogin = async (loginRequest: LoginRequest): Promise<LoginResponse> => {
-	const response = await fetch("http://localhost:8080/users/login", {
+	const response = await fetch(`${BASE_URL}/users/login`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -22,7 +23,7 @@ export const postLogin = async (loginRequest: LoginRequest): Promise<LoginRespon
 };
 
 export const postSignUp = async (signUpRequest: SignUpRequest): Promise<SignUpResponse> => {
-	const response = await fetch("http://localhost:8080/users/create", {
+	const response = await fetch(`${BASE_URL}/users/create`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

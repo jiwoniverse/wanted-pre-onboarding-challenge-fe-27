@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE_KEY } from "@/shared/constants";
 
-const BASE_URL = "http://localhost:8080";
+// 환경변수화
+export const BASE_URL = "http://localhost:8080";
 
 const createPostHeaders = (body: unknown) => {
 	if (body instanceof FormData)
