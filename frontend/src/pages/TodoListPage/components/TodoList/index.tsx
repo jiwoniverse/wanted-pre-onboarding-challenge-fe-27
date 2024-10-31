@@ -1,14 +1,17 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 import { TodoItemType } from "@/shared/types";
 
 import { Box, Text, Table } from "@chakra-ui/react";
 
 interface TodoListProps {
-	todos: TodoItemType[] | null;
-	onSelect: (id: string) => void;
-	selectedId?: string;
+	todos: TodoItemType[];
 }
 
-const TodoList = ({ todos, onSelect, selectedId }: TodoListProps) => {
+const TodoList = ({ todos }: TodoListProps) => {
+	const { id } = useParams();
+	const navigate = useNavigate();
+
 	return (
 		<Box width="100%">
 			<Table.Root size="md" showColumnBorder width="100%">
@@ -22,11 +25,11 @@ const TodoList = ({ todos, onSelect, selectedId }: TodoListProps) => {
 						todos.map((todo) => (
 							<Table.Row
 								key={todo.id}
-								onClick={() => onSelect(todo.id)}
+								onClick={() => navigate(`/todo/${todo.id}`)}
 								cursor="pointer"
-								_hover={{ backgroundColor: "#e7e7e7" }}
+								_hover={{ backgroundColor: "#eeeeee" }}
 								transition="all 0.2s ease"
-								bg={selectedId === todo.id ? "#e2efff" : "transparent"}
+								bg={id === todo.id ? "#e2efff" : "transparent"}
 							>
 								<Table.Cell>{todo.title}</Table.Cell>
 							</Table.Row>

@@ -10,30 +10,10 @@ import { Box, Card, Text } from "@chakra-ui/react";
 
 const TodoDetailPage = () => {
 	const { id } = useParams();
-	const [todo, setTodo] = useState<TodoItemType | null>(null);
+	const { todo } = useGetTodoById(id);
 
-	useEffect(() => {
-		if (id) {
-			fetchTodo();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [id]);
-
-	if (!id) {
-		return <Navigate to="/" />;
-	}
-
-	const fetchTodo = async () => {
-		try {
-			const { data } = await getTodoById(id);
-			setTodo(data);
-		} catch (error) {
-			console.error("To-do detail fetch error", error);
-		}
-	};
-
-	return (
-		<Box width="100%" height="100%" paddingTop={11}>
+	return todo ? (
+		<Box width="100%" height="100%">
 			<Card.Root
 				width="100%"
 				height="full"
