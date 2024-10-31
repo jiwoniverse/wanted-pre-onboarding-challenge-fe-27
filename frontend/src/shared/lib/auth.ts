@@ -2,6 +2,7 @@ import * as z from "zod";
 
 import { LoginSchema, SignUpSchema } from "@/shared/schema";
 import { postLogin, postSignUp } from "@/apis/auth";
+import { LOCAL_STORAGE_KEY } from "@/shared/constants";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
 	const validatedFields = LoginSchema.safeParse(values);
@@ -12,7 +13,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
 	try {
 		const response = await postLogin(values);
-		localStorage.setItem("access_token", response.token);
+		localStorage.setItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN, response.token);
 		return { success: response.message };
 	} catch (error) {
 		if (error instanceof Error) {
@@ -27,7 +28,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 export const logout = (): Promise<{ success?: string; error?: string }> => {
 	return new Promise((resolve) => {
 		try {
-			localStorage.removeItem("access_token");
+			localStorage.removeItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 			resolve({ success: "로그아웃 되었습니다." });
 		} catch (error) {
 			console.log("Unexpected error:", error);
@@ -45,7 +46,7 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
 
 	try {
 		const response = await postSignUp(values);
-		localStorage.setItem("access_token", response.token);
+		localStorage.setItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN, response.token);
 		return { success: response.message };
 	} catch (error) {
 		if (error instanceof Error) {

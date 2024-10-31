@@ -1,4 +1,4 @@
-// src/shared/components/common/PrivateRoute
+import { LOCAL_STORAGE_KEY } from "@/shared/constants";
 import type { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const PrivateRoute = ({
 	redirectTo = "/auth/login?success=false",
 	children,
 }: PrivateRouteProps) => {
-	const token = localStorage.getItem("access_token");
+	const token = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
 	if (!token) {
 		return <Navigate to={redirectTo} />;

@@ -1,11 +1,14 @@
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+
+import { LOCAL_STORAGE_KEY } from "@/shared/constants";
+
 import LoginForm from "@/pages/LoginPage/components/LoginForm";
 import { toaster } from "@/shared/components/ui/toaster";
-import { Navigate } from "react-router-dom";
 // import * as S from "./styles";
 
 const LoginPage = () => {
-	const token = localStorage.getItem("access_token");
+	const token = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
 	useEffect(() => {
 		const query = new URLSearchParams(window.location.search);
