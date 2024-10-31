@@ -48,7 +48,7 @@ const Header = () => {
 				display="flex"
 				justifyContent="space-between"
 				width="100%"
-				maxWidth="800px"
+				maxWidth="600px"
 				height="40px"
 			>
 				<Heading size="md">To do list</Heading>

@@ -15,17 +15,17 @@ const TodoListPage = () => {
 			gapY={10}
 			alignItems="center"
 			justifyContent="center"
-			maxWidth="800px"
+			maxWidth="600px"
 			width="100%"
 			flex={1}
 			flexGrow={1}
 		>
 			<Box width="100%" paddingY={2} display="flex" alignItems="center" justifyContent="flex-start">
-				<Flex direction="column" width="50%">
+				<Flex direction="column" width="100%">
 					<AddTodoForm />
 				</Flex>
 			</Box>
-			<VStack gap={4} maxWidth="800px" width="100%" flex={1} flexGrow={1}>
+			<VStack gap={4} maxWidth="600px" width="100%" flex={1} flexGrow={1}>
 				<Box width="100%">
 					<TodoList todos={todos} />
 				</Box>
