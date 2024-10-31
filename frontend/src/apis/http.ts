@@ -48,6 +48,23 @@ export const http = {
 		return response;
 	},
 
+	put: async (url: RequestInfo | URL, body: unknown) => {
+		const response = await fetch(BASE_URL + url, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+			},
+			body: JSON.stringify(body),
+		});
+
+		if (!response.ok) {
+			throw response;
+		}
+
+		return response;
+	},
+
 	patch: async (url: RequestInfo | URL, body: unknown) => {
 		const response = await fetch(BASE_URL + url, {
 			method: "PATCH",
