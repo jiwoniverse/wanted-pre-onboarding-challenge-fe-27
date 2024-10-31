@@ -6,7 +6,6 @@ export const useGetTodoById = (id?: string) => {
 		queryKey: ["todos", id],
 		queryFn: () => getTodoById(id!),
 		enabled: !!id,
-		staleTime: 60 * 1000,
 	});
 
 	return { todo: data?.data, isLoadingTodo: isLoading };

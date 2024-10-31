@@ -62,6 +62,7 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 					수정
 				</Button>
 			</DialogTrigger>
+
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle textStyle="md">할 일 수정하기</DialogTitle>
@@ -87,6 +88,7 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 								</VStack>
 							</VStack>
 						</DialogBody>
+
 						<DialogFooter gapX={2}>
 							<DialogActionTrigger asChild>
 								<Button size="xs" width={12} variant="outline">

@@ -81,6 +81,7 @@ const LoginForm = () => {
 					</S.Form>
 				</FormProvider>
 			</Fieldset.Root>
+
 			<Card.Footer padding="0">
 				<Button onClick={() => navigate("/auth/signup")} variant="plain">
 					계정이 없으신가요?

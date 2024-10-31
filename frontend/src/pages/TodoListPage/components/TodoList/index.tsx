@@ -17,7 +17,7 @@ const TodoList = ({ todos }: TodoListProps) => {
 			<Table.Root size="md" showColumnBorder width="100%">
 				<Table.Header>
 					<Table.Row bg="bg.subtle">
-						<Table.ColumnHeader>목록</Table.ColumnHeader>
+						<Table.ColumnHeader fontWeight="semibold">할 일 목록</Table.ColumnHeader>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
