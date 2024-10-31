@@ -38,3 +38,9 @@ export interface CreateTodoRequest {
 export interface TodoDetailResponse {
 	data: TodoItemType;
 }
+
+export interface UpdateTodoRequest {
+	id: string;
+	title: string;
+	content: string;
+}

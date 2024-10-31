@@ -1,4 +1,9 @@
-import { TodoListType, CreateTodoRequest, TodoDetailResponse } from "@/shared/types";
+import {
+	TodoListType,
+	CreateTodoRequest,
+	TodoDetailResponse,
+	UpdateTodoRequest,
+} from "@/shared/types";
 import { http } from "@/apis/http";
 
 export const getTodos = async () => {
@@ -11,4 +16,12 @@ export const createTodo = async ({ title, content }: CreateTodoRequest) => {
 
 export const getTodoById = async (id: string) => {
 	return http.get<TodoDetailResponse>(`/todos/${id}`);
+};
+
+export const updateTodo = async ({ id, title, content }: UpdateTodoRequest) => {
+	return http.put(`/todos/${id}`, { title, content });
+};
+
+export const deleteTodo = async (id: string) => {
+	return http.delete(`/todos/${id}`);
 };
