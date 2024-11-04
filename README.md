@@ -5,11 +5,12 @@
 ### 시작하기
 
 ```bash
-cd backend
+git clone https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api
+cd wanted-pre-onboarding-challenge-fe-1-api
 yarn
 yarn start # localhost:8080
 
-cd frontend
+cd wanted-pre-onboarding-challenge-fe-27
 yarn
 yarn dev # localhost:5173
 ```
