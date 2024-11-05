@@ -4,7 +4,7 @@
 
 ### 시작하기
 
-[배포 링크](todos-kappa-cyan.vercel.app)
+[배포 링크](https://todos-kappa-cyan.vercel.app)
 
 백엔드는 아래 방법으로 로컬에서 실행시켜주셔야 합니다.
 
