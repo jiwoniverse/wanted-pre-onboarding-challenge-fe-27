@@ -1,6 +1,6 @@
-import { useDeleteTodo } from "@/shared/hooks/queries/useDeleteTodo";
+import { useDeleteTodo } from "@//hooks/queries/useDeleteTodo";
 
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@//components/ui/button";
 import {
 	DialogActionTrigger,
 	DialogBody,
@@ -11,7 +11,7 @@ import {
 	DialogRoot,
 	DialogTitle,
 	DialogTrigger,
-} from "@/shared/components/ui/dialog";
+} from "@//components/ui/dialog";
 
 const DeleteTodoModal = ({ id }: { id?: string }) => {
 	const { mutateDeleteTodo } = useDeleteTodo();

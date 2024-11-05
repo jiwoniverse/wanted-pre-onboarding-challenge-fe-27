@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { useGetTodos } from "@/shared/hooks/queries/useGetTodos";
+import { useGetTodos } from "@//hooks/queries/useGetTodos";
 
 import TodoList from "./components/TodoList";
 import { Flex, Box, VStack } from "@chakra-ui/react";

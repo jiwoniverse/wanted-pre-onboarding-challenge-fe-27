@@ -1,4 +1,4 @@
-import { API_ERROR_MESSAGE, SERVER_ERROR_REGEX } from "@/shared/constants/errorMessage";
+import { API_ERROR_MESSAGE, SERVER_ERROR_REGEX } from "@/constants/errorMessage";
 
 const createApiErrorMessage = (statusCode: number) => {
 	const isServerError = SERVER_ERROR_REGEX.test(statusCode.toString());

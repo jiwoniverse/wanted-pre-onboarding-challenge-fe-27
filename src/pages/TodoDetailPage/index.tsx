@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { useGetTodoById } from "@/shared/hooks/queries/useGetTodoById";
+import { useGetTodoById } from "@//hooks/queries/useGetTodoById";
 
 import dayjs from "dayjs";
 
@@ -9,8 +9,8 @@ import UpdateTodoModal from "./components/UpdateTodoModal";
 import { Box, Card, HStack, VStack, Text, Em, Heading } from "@chakra-ui/react";
 
 const TodoDetailPage = () => {
-	const { id } = useParams();
-	const { todo } = useGetTodoById(id);
+	const { todoId } = useParams();
+	const { todo } = useGetTodoById(todoId);
 
 	return todo ? (
 		<Box width="100%" height="100%">
@@ -24,8 +24,8 @@ const TodoDetailPage = () => {
 				gapY="1"
 			>
 				<HStack width="full">
-					<UpdateTodoModal id={id} todo={todo} />
-					<DeleteTodoModal id={id} />
+					<UpdateTodoModal id={todoId} todo={todo} />
+					<DeleteTodoModal id={todoId} />
 				</HStack>
 				<VStack
 					paddingY={6}

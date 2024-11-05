@@ -4,24 +4,26 @@ import App from "./App";
 
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
-import PrivateRoute from "@/shared/components/common/PrivateRoute";
+import PrivateRoute from "@/components/common/PrivateRoute";
 import SignUpPage from "@/pages/SignUpPage";
 import TodoListPage from "@/pages/TodoListPage";
-import TodoDetailPage from "./pages/TodoDetailPage";
+import TodoDetailPage from "@/pages/TodoDetailPage";
+
+import { PATH } from "@/constants/path";
 
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: PATH.ROOT,
 		element: <App />,
 		children: [
 			{
 				path: "",
 				element: <HomePage />,
 			},
-			{ path: "/auth/login", element: <LoginPage /> },
-			{ path: "/auth/signup", element: <SignUpPage /> },
+			{ path: PATH.LOGIN, element: <LoginPage /> },
+			{ path: PATH.SIGN_UP, element: <SignUpPage /> },
 			{
-				path: "/todo",
+				path: PATH.TODO,
 				element: (
 					<PrivateRoute>
 						<TodoListPage />
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
 				),
 				children: [
 					{
-						path: ":id",
+						path: "/:todoId",
 						element: (
 							<PrivateRoute>
 								<TodoDetailPage />

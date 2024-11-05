@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import { TodoItemType } from "@/shared/types";
+import { TodoItemType } from "@//types";
 
 import { Box, Text, Table } from "@chakra-ui/react";
 

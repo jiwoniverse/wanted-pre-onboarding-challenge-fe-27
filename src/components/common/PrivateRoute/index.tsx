@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from "@/shared/constants";
+import { LOCAL_STORAGE_KEY } from "@//constants";
 import type { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 

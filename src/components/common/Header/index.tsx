@@ -1,10 +1,10 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTransition } from "react";
 
-import { logout } from "@/shared/lib/auth";
+import { logout } from "@//lib/auth";
 
 import { Box, Heading, HStack } from "@chakra-ui/react";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@//components/ui/button";
 import { toaster } from "../../ui/toaster";
 
 const Header = () => {

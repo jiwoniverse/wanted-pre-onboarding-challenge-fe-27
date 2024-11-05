@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
-import { LOCAL_STORAGE_KEY } from "@/shared/constants";
+import { LOCAL_STORAGE_KEY } from "@//constants";
 
 import LoginForm from "@/pages/LoginPage/components/LoginForm";
-import { toaster } from "@/shared/components/ui/toaster";
+import { toaster } from "@//components/ui/toaster";
 // import * as S from "./styles";
 
 const LoginPage = () => {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { deleteTodo } from "@/apis/todo";
 
-import { toaster } from "@/shared/components/ui/toaster";
+import { toaster } from "@//components/ui/toaster";
 
 export const useDeleteTodo = (id?: string) => {
 	const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import createApiErrorMessage from "./apiErrorMessageCreator";
 
-import { LoginRequest, LoginResponse, SignUpRequest, SignUpResponse } from "@/shared/types";
+import { LoginRequest, LoginResponse, SignUpRequest, SignUpResponse } from "@/types";
 import { BASE_URL } from "./http";
 
 export const postLogin = async (loginRequest: LoginRequest): Promise<LoginResponse> => {

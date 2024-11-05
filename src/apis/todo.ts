@@ -1,9 +1,4 @@
-import {
-	TodoListType,
-	CreateTodoRequest,
-	TodoDetailResponse,
-	UpdateTodoRequest,
-} from "@/shared/types";
+import { TodoListType, CreateTodoRequest, TodoDetailResponse, UpdateTodoRequest } from "@/types";
 import { http } from "@/apis/http";
 
 export const getTodos = async () => {

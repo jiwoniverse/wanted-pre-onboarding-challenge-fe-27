@@ -1,9 +1,9 @@
-import { useCreateTodo } from "@/shared/hooks/queries/useCreateTodo";
+import { useCreateTodo } from "@//hooks/queries/useCreateTodo";
 
 import * as z from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TodoSchema } from "@/shared/schema";
+import { TodoSchema } from "@//schema";
 
 import { Button, Input, VStack } from "@chakra-ui/react";
 

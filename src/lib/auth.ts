@@ -1,8 +1,8 @@
 import * as z from "zod";
 
-import { LoginSchema, SignUpSchema } from "@/shared/schema";
+import { LoginSchema, SignUpSchema } from "@//schema";
 import { postLogin, postSignUp } from "@/apis/auth";
-import { LOCAL_STORAGE_KEY } from "@/shared/constants";
+import { LOCAL_STORAGE_KEY } from "@/constants";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
 	const validatedFields = LoginSchema.safeParse(values);

@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from "@/shared/constants";
+import { LOCAL_STORAGE_KEY } from "@/constants";
 
 // 환경변수화
 export const BASE_URL = "http://localhost:8080";

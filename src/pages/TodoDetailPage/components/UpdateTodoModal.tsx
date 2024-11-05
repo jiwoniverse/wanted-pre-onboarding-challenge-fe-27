@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import * as z from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TodoSchema } from "@/shared/schema";
+import { TodoSchema } from "@//schema";
 
-import { useUpdateTodo } from "@/shared/hooks/queries/useUpdateTodo";
-import { TodoItemType } from "@/shared/types";
+import { useUpdateTodo } from "@//hooks/queries/useUpdateTodo";
+import { TodoItemType } from "@//types";
 
 import { Input, VStack } from "@chakra-ui/react";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@//components/ui/button";
 import {
 	DialogActionTrigger,
 	DialogBody,
@@ -20,7 +20,7 @@ import {
 	DialogRoot,
 	DialogTitle,
 	DialogTrigger,
-} from "@/shared/components/ui/dialog";
+} from "@//components/ui/dialog";
 
 interface UpdateTodoModalProps {
 	id?: string;
