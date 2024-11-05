@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 
-import { Provider } from "@/shared/components/ui/provider";
+import { Provider as ChakraUIProvider } from "@/shared/components/ui/provider";
 import { Global } from "@emotion/react";
 import globalStyles from "@/styles/globalStyles";
 import { Toaster } from "@/shared/components/ui/toaster";
@@ -25,11 +25,11 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
-			<Provider>
+			<ChakraUIProvider>
 				<Global styles={globalStyles} />
 				<RouterProvider router={router} />
 				<Toaster />
-			</Provider>
+			</ChakraUIProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	</StrictMode>
