@@ -4,15 +4,15 @@
 
 ### 시작하기
 
+[배포 링크](todos-kappa-cyan.vercel.app)
+
+백엔드는 아래 방법으로 로컬에서 실행시켜주셔야 합니다.
+
 ```bash
 git clone https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api
 cd wanted-pre-onboarding-challenge-fe-1-api
 yarn
 yarn start # localhost:8080
-
-cd wanted-pre-onboarding-challenge-fe-27
-yarn
-yarn dev # localhost:5173
 ```
 
 ### 기술 스택
