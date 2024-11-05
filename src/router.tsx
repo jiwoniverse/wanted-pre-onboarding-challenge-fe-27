@@ -31,7 +31,7 @@ const router = createBrowserRouter([
 				),
 				children: [
 					{
-						path: "/:todoId",
+						path: ":todoId",
 						element: (
 							<PrivateRoute>
 								<TodoDetailPage />
