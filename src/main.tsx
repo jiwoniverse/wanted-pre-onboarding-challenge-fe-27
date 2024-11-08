@@ -12,15 +12,30 @@ import { Global } from "@emotion/react";
 import globalStyles from "@/styles/globalStyles";
 import { Toaster } from "@/components/ui/toaster";
 
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			retry: 2,
-			staleTime: 2 * 60 * 1000, // 2분
-			gcTime: 30 * 1000, // 30초
+// NOTE: 이렇게 main.tsx에 queryClient를 생성해주는 경우 Next.js SSR에서는 사용자들이 같은 서버에서 같은 인스턴스를 사용하게 되는 치명적인 문제가 발생함에 유의할 것
+// const queryClient = new QueryClient({
+// 	defaultOptions: {
+// 		queries: {
+// 			retry: 2,
+// 			staleTime: 2 * 60 * 1000, // 2분
+// 			gcTime: 30 * 1000, // 30초
+// 		},
+// 	},
+// });
+
+const getQueryClient = () => {
+	return new QueryClient({
+		defaultOptions: {
+			queries: {
+				retry: 2,
+				staleTime: 2 * 60 * 1000, // 2분
+				gcTime: 30 * 1000, // 30초
+			},
 		},
-	},
-});
+	});
+};
+
+const queryClient = getQueryClient();
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
