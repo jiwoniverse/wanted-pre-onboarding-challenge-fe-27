@@ -4,6 +4,8 @@ import { LoginSchema, SignUpSchema } from "@//schema";
 import { postLogin, postSignUp } from "@/apis/auth";
 import { LOCAL_STORAGE_KEY } from "@/constants";
 
+export const isAuthenticated = () => !!localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+
 export const login = async (values: z.infer<typeof LoginSchema>) => {
 	const validatedFields = LoginSchema.safeParse(values);
 

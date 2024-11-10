@@ -1,9 +1,9 @@
-import { LOCAL_STORAGE_KEY } from "@/constants";
 import { Navigate } from "react-router-dom";
+import { isAuthenticated } from "@/lib/auth";
+import { PATH } from "@/constants/path";
 
 const HomePage = () => {
-	const token = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-	return token ? <Navigate to="/todo" /> : <Navigate to="/auth/login" />;
+	return isAuthenticated() ? <Navigate to={PATH.TODO} /> : <Navigate to={PATH.LOGIN} />;
 };
 
 export default HomePage;

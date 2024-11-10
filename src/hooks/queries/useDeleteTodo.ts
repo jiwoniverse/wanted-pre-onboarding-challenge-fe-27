@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { deleteTodo } from "@/apis/todo";
 
-import { toaster } from "@//components/ui/toaster";
+import { toaster } from "@/components/ui/toaster";
+import { PATH } from "@/constants/path";
 
 export const useDeleteTodo = (id?: string) => {
 	const navigate = useNavigate();
@@ -18,7 +19,7 @@ export const useDeleteTodo = (id?: string) => {
 				type: "success",
 				id: "delete-todo-success",
 			});
-			navigate("/todo");
+			navigate(PATH.TODO);
 		},
 	});
 
