@@ -11,8 +11,6 @@ import { Button } from "@/components/ui/button";
 import { priorityOptions } from "@/constants/todo";
 
 import { HiSortAscending } from "react-icons/hi";
-import { TbSortAscending } from "react-icons/tb";
-import { TbSortDescending } from "react-icons/tb";
 
 import { priorityType } from "@/types/todo";
 
