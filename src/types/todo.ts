@@ -1,22 +1,4 @@
-export interface LoginRequest {
-	email: string;
-	password: string;
-}
-
-export interface LoginResponse {
-	message: string;
-	token: string;
-}
-
-export interface SignUpRequest {
-	email: string;
-	password: string;
-}
-
-export interface SignUpResponse {
-	message: string;
-	token: string;
-}
+export type priorityType = "urgent" | "normal" | "low";
 
 export interface TodoItemType {
 	title: string;
@@ -24,6 +6,7 @@ export interface TodoItemType {
 	id: string;
 	createdAt: string;
 	updatedAt: string;
+	priority: priorityType;
 }
 
 export interface TodoListType {
@@ -33,6 +16,7 @@ export interface TodoListType {
 export interface CreateTodoRequest {
 	title: string;
 	content: string;
+	priority: priorityType;
 }
 
 export interface TodoDetailResponse {
@@ -43,4 +27,5 @@ export interface UpdateTodoRequest {
 	id: string;
 	title: string;
 	content: string;
+	priority: priorityType;
 }

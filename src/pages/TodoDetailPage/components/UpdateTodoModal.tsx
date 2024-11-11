@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 import * as z from "zod";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TodoSchema } from "@//schema";
+import { TodoSchema } from "@/schema";
 
-import { useUpdateTodo } from "@//hooks/queries/useUpdateTodo";
-import { TodoItemType } from "@//types";
+import { useUpdateTodo } from "@/hooks/queries/useUpdateTodo";
+import { TodoItemType } from "@/types/todo";
 
-import { Input, VStack } from "@chakra-ui/react";
-import { Button } from "@//components/ui/button";
+import { HStack, Input, VStack } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import {
 	DialogActionTrigger,
 	DialogBody,
@@ -20,7 +20,9 @@ import {
 	DialogRoot,
 	DialogTitle,
 	DialogTrigger,
-} from "@//components/ui/dialog";
+} from "@/components/ui/dialog";
+import { Radio, RadioGroup } from "@/components/ui/radio";
+import { priorityOptions } from "@/constants/todo";
 
 interface UpdateTodoModalProps {
 	id?: string;
@@ -36,6 +38,7 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 		defaultValues: {
 			title: todo.title,
 			content: todo.content,
+			priority: todo.priority,
 		},
 		mode: "onChange",
 	});
@@ -44,15 +47,17 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 		methods.reset({
 			title: todo.title,
 			content: todo.content,
+			priority: todo.priority,
 		});
 	}, [todo, methods]);
 
 	const handleUpdateTodo = async (values: z.infer<typeof TodoSchema>) => {
+		console.log("id", id);
 		if (!id) return;
 
-		const { title, content } = values;
+		const { title, content, priority } = values;
 
-		mutateUpdateTodo({ id, title, content }, { onSuccess: () => setOpen(false) });
+		mutateUpdateTodo({ id, title, content, priority }, { onSuccess: () => setOpen(false) });
 	};
 
 	return (
@@ -73,6 +78,33 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 						<DialogBody>
 							<VStack width="100%" gapY={4}>
 								<VStack width="100%">
+									<Controller
+										name="priority"
+										control={methods.control}
+										render={({ field }) => (
+											<RadioGroup
+												name={field.name}
+												value={field.value}
+												onValueChange={({ value }) => {
+													field.onChange(value);
+												}}
+												size="sm"
+											>
+												<HStack gap="3">
+													{priorityOptions.map((option) => (
+														<Radio
+															key={option.value}
+															value={option.value}
+															inputProps={{ onBlur: field.onBlur }}
+															cursor="pointer"
+														>
+															{option.label}
+														</Radio>
+													))}
+												</HStack>
+											</RadioGroup>
+										)}
+									/>
 									<Input
 										{...methods.register("title")}
 										placeholder="할 일 제목"

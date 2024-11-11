@@ -1,8 +1,10 @@
 import * as z from "zod";
 
-import { LoginSchema, SignUpSchema } from "@//schema";
+import { LoginSchema, SignUpSchema } from "@/schema";
 import { postLogin, postSignUp } from "@/apis/auth";
-import { LOCAL_STORAGE_KEY } from "@/constants";
+import { LOCAL_STORAGE_KEY } from "@/constants/auth";
+
+export const accessToken = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN) ?? "";
 
 export const isAuthenticated = () => !!localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 

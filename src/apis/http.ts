@@ -1,13 +1,13 @@
-import { LOCAL_STORAGE_KEY } from "@/constants";
+import { accessToken } from "@/lib/auth";
 
-// 환경변수화
+// NOTE: 환경변수화
 export const BASE_URL = "http://localhost:8080";
 
 const createPostHeaders = (body: unknown) => {
 	if (body instanceof FormData)
 		return {
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN)}`,
+				Authorization: accessToken,
 			},
 			body: body,
 		};
@@ -15,19 +15,19 @@ const createPostHeaders = (body: unknown) => {
 	return {
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN)}`,
+			Authorization: accessToken,
 		},
 		body: JSON.stringify(body),
 	};
 };
 
 export const http = {
-	get: async <T>(url: RequestInfo | URL): Promise<T> => {
+	get: async <T>(url: string): Promise<T> => {
 		const response = await fetch(BASE_URL + url, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN)}`,
+				Authorization: accessToken,
 			},
 		});
 
@@ -56,7 +56,7 @@ export const http = {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN)}`,
+				Authorization: accessToken,
 			},
 			body: JSON.stringify(body),
 		});
@@ -73,7 +73,7 @@ export const http = {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN)}`,
+				Authorization: accessToken,
 			},
 			body: JSON.stringify(body),
 		});
@@ -90,7 +90,7 @@ export const http = {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN)}`,
+				Authorization: accessToken,
 			},
 		});
 

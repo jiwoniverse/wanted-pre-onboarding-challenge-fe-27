@@ -5,12 +5,12 @@ import * as z from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SignUpSchema } from "@//schema";
-import { signUp } from "@//lib/auth";
+import { SignUpSchema } from "@/schema";
+import { signUp } from "@/lib/auth";
 
 import { Card, Button, Fieldset, Input, Stack, Heading } from "@chakra-ui/react";
-import { Field } from "@//components/ui/field";
-import { Alert } from "@//components/ui/alert";
+import { Field } from "@/components/ui/field";
+import { Alert } from "@/components/ui/alert";
 import * as S from "./styles";
 
 const SignUpForm = () => {

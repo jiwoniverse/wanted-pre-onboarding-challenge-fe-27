@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-import Header from "@//components/common/Header";
+import Header from "@/components/common/Header";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
 	return (

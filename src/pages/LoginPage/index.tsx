@@ -1,15 +1,12 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-
-import { LOCAL_STORAGE_KEY } from "@//constants";
+import { accessToken } from "@/lib/auth";
 
 import LoginForm from "@/pages/LoginPage/components/LoginForm";
-import { toaster } from "@//components/ui/toaster";
+import { toaster } from "@/components/ui/toaster";
 // import * as S from "./styles";
 
 const LoginPage = () => {
-	const token = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-
 	useEffect(() => {
 		const query = new URLSearchParams(window.location.search);
 		const successParam = query.get("success");
@@ -23,7 +20,7 @@ const LoginPage = () => {
 		}
 	}, []);
 
-	return token ? <Navigate to="/" /> : <LoginForm />;
+	return accessToken ? <Navigate to="/" /> : <LoginForm />;
 };
 
 export default LoginPage;

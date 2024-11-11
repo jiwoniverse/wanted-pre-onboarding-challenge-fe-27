@@ -1,11 +1,10 @@
-import { LOCAL_STORAGE_KEY } from "@//constants";
-import SignUpForm from "./components/SignUpForm";
+import { accessToken } from "@/lib/auth";
+
 import { Navigate } from "react-router-dom";
+import SignUpForm from "./components/SignUpForm";
 
 const SignUpPage = () => {
-	const token = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-
-	return token ? <Navigate to="/" /> : <SignUpForm />;
+	return accessToken ? <Navigate to="/" /> : <SignUpForm />;
 };
 
 export default SignUpPage;

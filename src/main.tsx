@@ -31,7 +31,7 @@ const getQueryClient = () => {
 			queries: {
 				retry: 2,
 				staleTime: 2 * 60 * 1000, // 2분
-				gcTime: 30 * 1000, // 30초
+				// gcTime: 30 * 1000, // 30초
 			},
 		},
 	});
