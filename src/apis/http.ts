@@ -1,4 +1,4 @@
-import { accessToken } from "@/lib/auth";
+import { getAccessToken } from "@/lib/auth";
 
 // NOTE: 환경변수화
 export const BASE_URL = "http://localhost:8080";
@@ -7,7 +7,7 @@ const createPostHeaders = (body: unknown) => {
 	if (body instanceof FormData)
 		return {
 			headers: {
-				Authorization: accessToken,
+				Authorization: getAccessToken(),
 			},
 			body: body,
 		};
@@ -15,7 +15,7 @@ const createPostHeaders = (body: unknown) => {
 	return {
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: accessToken,
+			Authorization: getAccessToken(),
 		},
 		body: JSON.stringify(body),
 	};
@@ -27,7 +27,7 @@ export const http = {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: accessToken,
+				Authorization: getAccessToken(),
 			},
 		});
 
@@ -56,7 +56,7 @@ export const http = {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: accessToken,
+				Authorization: getAccessToken(),
 			},
 			body: JSON.stringify(body),
 		});
@@ -73,7 +73,7 @@ export const http = {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: accessToken,
+				Authorization: getAccessToken(),
 			},
 			body: JSON.stringify(body),
 		});
@@ -90,7 +90,7 @@ export const http = {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: accessToken,
+				Authorization: getAccessToken(),
 			},
 		});
 

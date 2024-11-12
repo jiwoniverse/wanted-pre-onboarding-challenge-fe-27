@@ -4,9 +4,8 @@ import { LoginSchema, SignUpSchema } from "@/schema/auth";
 import { postLogin, postSignUp } from "@/apis/auth";
 import { LOCAL_STORAGE_KEY } from "@/constants/auth";
 
-export const accessToken = localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN) ?? "";
-
 // 함수가 아니라 변수로 선언하면 값이 파일이 처음 불러와질 때 한번만 평가되므로 값이 업데이트 되지 않음
+export const getAccessToken = () => localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN) ?? "";
 export const isAuthenticated = () => !!localStorage.getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
