@@ -1,14 +1,12 @@
 import { useCreateTodo } from "@/hooks/queries/useCreateTodo";
 
 import * as z from "zod";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TodoSchema } from "@/schema";
+import { TodoSchema } from "@/schema/todo";
 
-import { Button, Input, VStack, HStack } from "@chakra-ui/react";
-import { Radio, RadioGroup } from "@/components/ui/radio";
-
-import { priorityOptions } from "@/constants/todo";
+import PriorityRadioGroup from "@/components/todo/PriorityRadioGroup";
+import { Button, Input, VStack } from "@chakra-ui/react";
 
 const AddTodoForm = () => {
 	const { mutateCreateTodo } = useCreateTodo();
@@ -39,35 +37,16 @@ const AddTodoForm = () => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={methods.handleSubmit(onSubmit)}>
-				<VStack width="100%" gapY={4}>
+				<VStack
+					width="100%"
+					gapY={4}
+					padding={6}
+					borderWidth="1px"
+					borderRadius={10}
+					borderColor="gray.200"
+				>
 					<VStack width="100%" gapY={4} alignItems="start">
-						<Controller
-							name="priority"
-							control={methods.control}
-							render={({ field }) => (
-								<RadioGroup
-									name={field.name}
-									value={field.value}
-									onValueChange={({ value }) => {
-										field.onChange(value);
-									}}
-									size="sm"
-								>
-									<HStack gap="3">
-										{priorityOptions.map((option) => (
-											<Radio
-												key={option.value}
-												value={option.value}
-												inputProps={{ onBlur: field.onBlur }}
-												cursor="pointer"
-											>
-												{option.label}
-											</Radio>
-										))}
-									</HStack>
-								</RadioGroup>
-							)}
-						/>
+						<PriorityRadioGroup name="priority" />
 
 						<VStack width="100%" gapY={2}>
 							<Input

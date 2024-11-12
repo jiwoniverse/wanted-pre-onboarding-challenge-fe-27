@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 
 import * as z from "zod";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TodoSchema } from "@/schema";
+import { TodoSchema } from "@/schema/todo";
 
 import { useUpdateTodo } from "@/hooks/queries/useUpdateTodo";
 import { TodoItemType } from "@/types/todo";
 
-import { HStack, Input, VStack } from "@chakra-ui/react";
+import PriorityRadioGroup from "@/components/todo/PriorityRadioGroup";
+import { Input, VStack } from "@chakra-ui/react";
 import { Button } from "@/components/ui/button";
 import {
 	DialogActionTrigger,
@@ -21,8 +22,6 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { Radio, RadioGroup } from "@/components/ui/radio";
-import { priorityOptions } from "@/constants/todo";
 
 interface UpdateTodoModalProps {
 	id?: string;
@@ -76,47 +75,23 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 				<FormProvider {...methods}>
 					<form onSubmit={methods.handleSubmit(handleUpdateTodo)}>
 						<DialogBody>
-							<VStack width="100%" gapY={4}>
-								<VStack width="100%">
-									<Controller
-										name="priority"
-										control={methods.control}
-										render={({ field }) => (
-											<RadioGroup
-												name={field.name}
-												value={field.value}
-												onValueChange={({ value }) => {
-													field.onChange(value);
-												}}
-												size="sm"
-											>
-												<HStack gap="3">
-													{priorityOptions.map((option) => (
-														<Radio
-															key={option.value}
-															value={option.value}
-															inputProps={{ onBlur: field.onBlur }}
-															cursor="pointer"
-														>
-															{option.label}
-														</Radio>
-													))}
-												</HStack>
-											</RadioGroup>
-										)}
-									/>
-									<Input
-										{...methods.register("title")}
-										placeholder="할 일 제목"
-										variant="flushed"
-										autoComplete="off"
-									/>
-									<Input
-										{...methods.register("content")}
-										placeholder="할 일 내용"
-										variant="flushed"
-										autoComplete="off"
-									/>
+							<VStack width="100%">
+								<VStack width="100%" alignItems="start" gapY={4}>
+									<PriorityRadioGroup name="priority" />
+									<VStack width="100%" gapY={2}>
+										<Input
+											{...methods.register("title")}
+											placeholder="할 일 제목"
+											variant="flushed"
+											autoComplete="off"
+										/>
+										<Input
+											{...methods.register("content")}
+											placeholder="할 일 내용"
+											variant="flushed"
+											autoComplete="off"
+										/>
+									</VStack>
 								</VStack>
 							</VStack>
 						</DialogBody>
