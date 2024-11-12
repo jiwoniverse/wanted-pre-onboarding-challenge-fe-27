@@ -4,8 +4,8 @@ import { useGetTodoById } from "@/hooks/apis/useGetTodoById";
 
 import dayjs from "dayjs";
 
-import DeleteTodoModal from "./components/DeleteTodoModal";
-import UpdateTodoModal from "./components/UpdateTodoModal";
+import { DeleteTodoModal as DeleteTodoModalTriggerButton } from "./components/DeleteTodoModal";
+import { UpdateTodoModal as UpdateTodoModalTriggerButton } from "./components/UpdateTodoModal";
 import { Box, Card, HStack, VStack, Text, Em, Heading } from "@chakra-ui/react";
 import {
 	boxStyle,
@@ -26,8 +26,8 @@ const TodoDetailPage = () => {
 		<Box {...boxStyle}>
 			<Card.Root {...cardRootStyle}>
 				<HStack {...hStackStyle}>
-					<UpdateTodoModal id={todoId} todo={todo} />
-					<DeleteTodoModal id={todoId} />
+					<UpdateTodoModalTriggerButton id={todoId} todo={todo} />
+					<DeleteTodoModalTriggerButton id={todoId} />
 				</HStack>
 				<VStack {...vStackStyle}>
 					<Heading {...headingStyle}>{todo.title}</Heading>

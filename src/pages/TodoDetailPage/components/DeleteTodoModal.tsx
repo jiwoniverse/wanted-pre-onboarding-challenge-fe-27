@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Text } from "@chakra-ui/react";
 
-const DeleteTodoModal = ({ id }: { id?: string }) => {
+export const DeleteTodoModal = ({ id }: { id?: string }) => {
 	const { mutateDeleteTodo } = useDeleteTodo();
 
 	const handleDelete = (id?: string) => {
@@ -52,5 +52,3 @@ const DeleteTodoModal = ({ id }: { id?: string }) => {
 		</DialogRoot>
 	);
 };
-
-export default DeleteTodoModal;

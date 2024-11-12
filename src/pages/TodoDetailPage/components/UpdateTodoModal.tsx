@@ -28,7 +28,7 @@ interface UpdateTodoModalProps {
 	todo: TodoItemType;
 }
 
-const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
+export const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 	const [open, setOpen] = useState(false);
 	const { mutateUpdateTodo } = useUpdateTodo(id);
 
@@ -113,5 +113,3 @@ const UpdateTodoModal = ({ id, todo }: UpdateTodoModalProps) => {
 		</DialogRoot>
 	);
 };
-
-export default UpdateTodoModal;
