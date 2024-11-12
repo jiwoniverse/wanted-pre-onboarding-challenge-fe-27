@@ -3,7 +3,7 @@ import { Outlet, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useDebounce } from "@/hooks/useDebounce";
-import { useGetTodos } from "@/hooks/queries/useGetTodos";
+import { useGetTodos } from "@/hooks/apis/useGetTodos";
 
 import PriorityFilterMenu from "./components/PriorityFilterMenu";
 import AddTodoForm from "./components/AddTodoForm";

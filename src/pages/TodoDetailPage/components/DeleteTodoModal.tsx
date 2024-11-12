@@ -1,4 +1,4 @@
-import { useDeleteTodo } from "@/hooks/queries/useDeleteTodo";
+import { useDeleteTodo } from "@/hooks/apis/useDeleteTodo";
 
 import { Button } from "@/components/ui/button";
 import {

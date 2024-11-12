@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TodoSchema } from "@/schema/todo";
 
-import { useUpdateTodo } from "@/hooks/queries/useUpdateTodo";
+import { useUpdateTodo } from "@/hooks/apis/useUpdateTodo";
 import { TodoItemType } from "@/types/todo";
 
 import PriorityRadioGroup from "@/components/todo/PriorityRadioGroup";

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { useGetTodoById } from "@/hooks/queries/useGetTodoById";
+import { useGetTodoById } from "@/hooks/apis/useGetTodoById";
 
 import dayjs from "dayjs";
 
