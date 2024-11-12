@@ -4,4 +4,4 @@ export const PATH = {
 	SIGN_UP: "/auth/signup",
 	TODO: "/todo",
 	TODO_DETAIL: (todoId: string) => `/todo/${todoId}`,
-} as const;
+};

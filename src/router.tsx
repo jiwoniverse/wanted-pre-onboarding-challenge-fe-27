@@ -1,4 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
+import type { LoaderFunctionArgs } from "react-router-dom";
 import { isAuthenticated } from "./lib/auth";
 
 import App from "./App";
@@ -11,10 +12,19 @@ import TodoDetailPage from "@/pages/TodoDetailPage";
 
 import { PATH } from "@/constants/path";
 
-// loader
-const authLoader = async () => {
-	if (!isAuthenticated()) {
+// const privateRoutes = [PATH.TODO];
+const authRoutes = [PATH.LOGIN, PATH.SIGN_UP];
+
+const authLoader = async ({ request }: LoaderFunctionArgs) => {
+	const path = new URL(request.url).pathname;
+
+	const isPrivateRoutes = path.includes("todo");
+	const isAuthRoutes = authRoutes.includes(path);
+
+	if (!isAuthenticated() && isPrivateRoutes) {
 		return redirect(PATH.LOGIN);
+	} else if (isAuthenticated() && isAuthRoutes) {
+		return redirect(PATH.ROOT);
 	}
 	return null;
 };
@@ -23,23 +33,18 @@ const router = createBrowserRouter([
 	{
 		path: PATH.ROOT,
 		element: <App />,
+		loader: authLoader,
 		children: [
-			{
-				path: "",
-				element: <HomePage />,
-				loader: authLoader,
-			},
+			{ path: "", element: <HomePage /> },
 			{ path: PATH.LOGIN, element: <LoginPage /> },
 			{ path: PATH.SIGN_UP, element: <SignUpPage /> },
 			{
 				path: PATH.TODO,
 				element: <TodoListPage />,
-				loader: authLoader,
 				children: [
 					{
 						path: ":todoId",
 						element: <TodoDetailPage />,
-						loader: authLoader,
 					},
 				],
 			},
