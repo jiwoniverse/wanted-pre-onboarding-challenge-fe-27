@@ -19,7 +19,7 @@ interface PriorityFilterMenuProps {
 }
 
 const PriorityFilterMenu = ({ onFilterChange }: PriorityFilterMenuProps) => {
-	const [value, setValue] = useState("urgent");
+	const [value, setValue] = useState("");
 
 	const handleValueChange = (newValue: priorityType) => {
 		setValue(newValue);
