@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { priorityOptions } from "@/constants/todo";
 import { TodoItemType } from "@/types/todo";
 
@@ -13,9 +13,17 @@ interface TodoListProps {
 const TodoList = ({ todos }: TodoListProps) => {
 	const { todoId } = useParams();
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 
 	const getTodoLabel = (todo: TodoItemType) => {
 		return priorityOptions.find((option) => option.value === todo.priority)?.label;
+	};
+
+	const handleTodoClick = (todoId: string) => {
+		navigate({
+			pathname: `/todo/${todoId}`,
+			search: `?${searchParams.toString()}`,
+		});
 	};
 
 	return (
@@ -33,12 +41,13 @@ const TodoList = ({ todos }: TodoListProps) => {
 						</Table.ColumnHeader>
 					</Table.Row>
 				</Table.Header>
+
 				<Table.Body>
 					{todos && todos.length ? (
 						todos.map((todo) => (
 							<Table.Row
 								key={todo.id}
-								onClick={() => navigate(`/todo/${todo.id}`)}
+								onClick={() => handleTodoClick(todo.id)}
 								bgColor={todoId === todo.id ? "#e2efff" : "transparent"}
 								{...todoRowStyles}
 							>
@@ -60,9 +69,10 @@ const TodoList = ({ todos }: TodoListProps) => {
 						))
 					) : (
 						<Table.Row>
-							<Table.Cell />
-							<Table.Cell>
-								<Text textStyle="sm">할 일이 없어요! 🥲</Text>
+							<Table.Cell colSpan={4}>
+								<Text textStyle="sm" textAlign="center">
+									할 일이 없어요! 🥲
+								</Text>
 							</Table.Cell>
 						</Table.Row>
 					)}
