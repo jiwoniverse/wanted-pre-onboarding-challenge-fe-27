@@ -6,19 +6,22 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useGetTodos } from "@/hooks/apis/useGetTodos";
 
 import PriorityFilterMenu from "./components/PriorityFilterMenu";
+import SortOrderMenu from "./components/SortOrderMenu";
 import AddTodoForm from "./components/AddTodoForm";
 import TodoList from "./components/TodoList";
-import { Flex, Box, VStack, Input } from "@chakra-ui/react";
+
+import { Flex, Box, VStack, Input, HStack } from "@chakra-ui/react";
+import { IoSearchOutline } from "react-icons/io5";
 
 import { GetTodosParams } from "@/types/apis";
 import { priorityType } from "@/types/todo";
 
 const TodoListPage = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	const { register, watch } = useForm<{ keyword: string }>();
 	const keyword = watch("keyword");
 	const debouncedKeyword = useDebounce(keyword, 500);
-
-	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
 		if (debouncedKeyword) {
@@ -38,9 +41,29 @@ const TodoListPage = () => {
 		setSearchParams(searchParams);
 	};
 
+	const handleSortChange = (sort: string[]) => {
+		if (sort.length > 0) {
+			searchParams.set("sort", sort[0]);
+		} else {
+			searchParams.delete("sort");
+		}
+		setSearchParams(searchParams);
+	};
+
+	const handleOrderChange = (order: string[]) => {
+		if (order.length > 0) {
+			searchParams.set("order", order[0]);
+		} else {
+			searchParams.delete("order");
+		}
+		setSearchParams(searchParams);
+	};
+
 	const params: GetTodosParams = {
 		keyword: debouncedKeyword,
 		priorityFilter: searchParams.get("priority") as "urgent" | "normal" | "low" | undefined,
+		sort: (searchParams.get("sort") as "createdAt" | "updatedAt") || undefined,
+		order: (searchParams.get("order") as "asc" | "desc") || undefined,
 	};
 
 	const { todos } = useGetTodos(params);
@@ -62,17 +85,19 @@ const TodoListPage = () => {
 			</Box>
 
 			<VStack gap={4} maxWidth="600px" width="100%" flex={1} flexGrow={1}>
-				<Box width="100%">
+				<HStack width="100%">
+					<IoSearchOutline size="20px" color="gray" />
 					<Input
 						{...register("keyword")}
 						placeholder="검색어를 입력하세요"
 						autoComplete="off"
 						variant="flushed"
 					/>
-				</Box>
-				<Box width="100%" alignSelf="start">
+				</HStack>
+				<HStack width="100%" alignSelf="start" justifyContent="space-between">
 					<PriorityFilterMenu onFilterChange={handlePriorityChange} />
-				</Box>
+					<SortOrderMenu onSortChange={handleSortChange} onOrderChange={handleOrderChange} />
+				</HStack>
 				<Box width="100%">
 					<TodoList todos={todos} />
 				</Box>
