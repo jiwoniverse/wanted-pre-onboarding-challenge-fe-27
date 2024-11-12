@@ -5,7 +5,7 @@ import * as z from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SignUpSchema } from "@/schema";
+import { SignUpSchema } from "@/schema/auth";
 import { signUp } from "@/lib/auth";
 
 import { Card, Button, Fieldset, Input, Stack, Heading } from "@chakra-ui/react";

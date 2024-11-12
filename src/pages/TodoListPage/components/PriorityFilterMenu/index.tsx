@@ -29,7 +29,7 @@ const PriorityFilterMenu = ({ onFilterChange }: PriorityFilterMenuProps) => {
 	return (
 		<MenuRoot>
 			<MenuTrigger asChild>
-				<Button variant="outline" size="sm" padding={2}>
+				<Button variant="outline" size="sm" paddingX={2} paddingY={1} focusRing="none">
 					<HiSortAscending /> 우선순위
 				</Button>
 			</MenuTrigger>

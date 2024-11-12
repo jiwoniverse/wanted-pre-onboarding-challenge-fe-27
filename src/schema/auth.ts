@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { TODO_PRIORITY_VALUES } from "@/constants/todo";
 
 export const LoginSchema = z.object({
 	email: z
@@ -18,10 +17,4 @@ export const SignUpSchema = z.object({
 		.string()
 		.min(1, { message: "비밀번호를 입력해주세요" })
 		.min(8, { message: "비밀번호는 8자 이상으로 입력해주세요." }),
-});
-
-export const TodoSchema = z.object({
-	title: z.string().min(1, { message: "할 일 제목을 입력해주세요." }),
-	content: z.string().min(1, { message: "할 일 내용을 입력해주세요." }),
-	priority: z.enum(TODO_PRIORITY_VALUES, { message: "우선순위를 선택해주세요." }),
 });
