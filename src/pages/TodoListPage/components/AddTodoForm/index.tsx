@@ -22,7 +22,6 @@ const AddTodoForm = () => {
 	});
 
 	const onSubmit = async (values: z.infer<typeof TodoSchema>) => {
-		console.log("Form values on submit:", values);
 		mutateCreateTodo(values, {
 			onSuccess: () => {
 				methods.reset({

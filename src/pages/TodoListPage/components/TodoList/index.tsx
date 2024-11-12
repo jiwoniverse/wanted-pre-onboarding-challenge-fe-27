@@ -1,15 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { TodoItemType } from "@/types/todo";
-import { Box, Text, Table } from "@chakra-ui/react";
-import { activeRowBgColor, inactiveRowBgColor, subtleBgColor } from "./styles";
 import { priorityOptions } from "@/constants/todo";
+import { TodoItemType } from "@/types/todo";
+
+import { Box, Text, Table } from "@chakra-ui/react";
+import { subtleBgColor, todoRowStyles, boxStyles, tableRootStyles } from "./styles";
+import dayjs from "dayjs";
 
 interface TodoListProps {
 	todos: TodoItemType[];
 }
 
 const TodoList = ({ todos }: TodoListProps) => {
-	const { id } = useParams();
+	const { todoId } = useParams();
 	const navigate = useNavigate();
 
 	const getTodoLabel = (todo: TodoItemType) => {
@@ -17,12 +19,18 @@ const TodoList = ({ todos }: TodoListProps) => {
 	};
 
 	return (
-		<Box width="100%">
-			<Table.Root size="md" width="100%" interactive>
+		<Box {...boxStyles}>
+			<Table.Root {...tableRootStyles}>
 				<Table.Header>
 					<Table.Row bg={subtleBgColor}>
 						<Table.ColumnHeader width="15%" />
 						<Table.ColumnHeader fontWeight="semibold">목록</Table.ColumnHeader>
+						<Table.ColumnHeader width="15%" textAlign="center">
+							등록
+						</Table.ColumnHeader>
+						<Table.ColumnHeader width="15%" textAlign="center">
+							수정
+						</Table.ColumnHeader>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
@@ -31,15 +39,23 @@ const TodoList = ({ todos }: TodoListProps) => {
 							<Table.Row
 								key={todo.id}
 								onClick={() => navigate(`/todo/${todo.id}`)}
-								cursor="pointer"
-								_hover={{ backgroundColor: "#eeeeee" }}
-								transition="all 0.2s ease"
-								bg={id === todo.id ? activeRowBgColor : inactiveRowBgColor}
+								bgColor={todoId === todo.id ? "#e2efff" : "transparent"}
+								{...todoRowStyles}
 							>
 								<Table.Cell width="15%" textAlign="center">
 									{getTodoLabel(todo)}
 								</Table.Cell>
 								<Table.Cell>{todo.title}</Table.Cell>
+								<Table.Cell>
+									<Text textStyle="xs" textAlign="center">
+										{dayjs(todo.createdAt).format("YY.MM.DD")}
+									</Text>
+								</Table.Cell>
+								<Table.Cell>
+									<Text textStyle="xs" textAlign="center">
+										{dayjs(todo.updatedAt).format("YY.MM.DD")}
+									</Text>
+								</Table.Cell>
 							</Table.Row>
 						))
 					) : (

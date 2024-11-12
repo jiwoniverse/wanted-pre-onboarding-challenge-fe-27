@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 
 import { priorityOptions } from "@/constants/todo";
 
-import { HiSortAscending } from "react-icons/hi";
+import { IoFilter } from "react-icons/io5";
 
 import { priorityType } from "@/types/todo";
 
@@ -30,7 +30,7 @@ const PriorityFilterMenu = ({ onFilterChange }: PriorityFilterMenuProps) => {
 		<MenuRoot>
 			<MenuTrigger asChild>
 				<Button variant="outline" size="sm" paddingX={2} paddingY={1} focusRing="none">
-					<HiSortAscending /> 우선순위
+					<IoFilter /> 필터
 				</Button>
 			</MenuTrigger>
 			<MenuContent minW="10rem">
