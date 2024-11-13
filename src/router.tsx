@@ -3,19 +3,14 @@ import type { LoaderFunctionArgs } from "react-router-dom";
 import { isAuthenticated } from "@/services/authService";
 
 import App from "./App";
-
-import HomePage from "@/pages/HomePage";
-import LoginPage from "@/pages/LoginPage";
-import SignUpPage from "@/pages/SignUpPage";
-import TodoListPage from "@/pages/TodoListPage";
-import TodoDetailPage from "@/pages/TodoDetailPage";
+import { HomePage, LoginPage, SignUpPage, TodoListPage, TodoDetailPage } from "./pages";
 
 import { PATH } from "@/constants/path";
 
 // const privateRoutes = [PATH.TODO];
 const authRoutes = [PATH.LOGIN, PATH.SIGN_UP];
 
-const authLoader = async ({ request }: LoaderFunctionArgs) => {
+const authLoader = ({ request }: LoaderFunctionArgs) => {
 	const path = new URL(request.url).pathname;
 
 	const isPrivateRoutes = path.includes("todo");
@@ -35,7 +30,10 @@ const router = createBrowserRouter([
 		element: <App />,
 		loader: authLoader,
 		children: [
-			{ path: "", element: <HomePage /> },
+			{
+				path: "",
+				element: <HomePage />,
+			},
 			{ path: PATH.LOGIN, element: <LoginPage /> },
 			{ path: PATH.SIGN_UP, element: <SignUpPage /> },
 			{
