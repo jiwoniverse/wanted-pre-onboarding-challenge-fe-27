@@ -1,6 +1,5 @@
 import { useDeleteTodo } from "@/hooks/apis/useDeleteTodo";
 
-import { Button } from "@/components/ui/button";
 import {
 	DialogActionTrigger,
 	DialogBody,
@@ -12,6 +11,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Text } from "@chakra-ui/react";
 
 const DeleteTodoModal = ({ id }: { id?: string }) => {
 	const { mutateDeleteTodo } = useDeleteTodo();
@@ -34,7 +35,7 @@ const DeleteTodoModal = ({ id }: { id?: string }) => {
 					<DialogTitle textStyle="md">할 일 삭제하기</DialogTitle>
 				</DialogHeader>
 				<DialogBody>
-					<p>정말 삭제하시겠어요?</p>
+					<Text>정말 삭제하시겠어요?</Text>
 				</DialogBody>
 				<DialogFooter gapX={2}>
 					<DialogActionTrigger asChild>

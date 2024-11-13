@@ -1,4 +1,9 @@
 import { useState } from "react";
+
+import { priorityOptions } from "@/constants/todo";
+
+import { priorityType } from "@/types/todo";
+
 import {
 	MenuContent,
 	MenuRadioItem,
@@ -7,35 +12,37 @@ import {
 	MenuTrigger,
 } from "@/components/ui/menu";
 import { Button } from "@/components/ui/button";
-
-import { priorityOptions } from "@/constants/todo";
-
-import { IoFilter } from "react-icons/io5";
-
-import { priorityType } from "@/types/todo";
+import { FaFilter } from "react-icons/fa";
 
 interface PriorityFilterMenuProps {
 	onFilterChange: (priority: priorityType) => void;
 }
 
 const PriorityFilterMenu = ({ onFilterChange }: PriorityFilterMenuProps) => {
-	const [value, setValue] = useState("");
+	const [priority, setPriority] = useState("");
 
-	const handleValueChange = (newValue: priorityType) => {
-		setValue(newValue);
-		onFilterChange(newValue);
+	const handleValueChange = (newPriority: priorityType) => {
+		setPriority(newPriority);
+		onFilterChange(newPriority);
 	};
 
 	return (
-		<MenuRoot>
+		<MenuRoot size="md">
 			<MenuTrigger asChild>
-				<Button variant="outline" size="sm" paddingX={2} paddingY={1} focusRing="none">
-					<IoFilter /> 필터
+				<Button
+					variant="ghost"
+					backgroundColor={priority && "#e6e6e6"}
+					size="sm"
+					paddingX={2}
+					paddingY={1}
+					focusRing="none"
+				>
+					<FaFilter color="#616161" />
 				</Button>
 			</MenuTrigger>
 			<MenuContent minW="10rem">
 				<MenuRadioItemGroup
-					value={value}
+					value={priority}
 					onValueChange={(e) => handleValueChange(e.value as priorityType)}
 				>
 					<MenuRadioItem key="전체" value="" cursor="pointer">

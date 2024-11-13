@@ -1,4 +1,4 @@
-import { getAccessToken } from "@/lib/auth";
+import { getAccessToken } from "@/services/authService";
 
 // NOTE: 환경변수화
 export const BASE_URL = "http://localhost:8080";

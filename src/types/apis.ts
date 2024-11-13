@@ -18,9 +18,14 @@ export interface SignUpResponse {
 	token: string;
 }
 
+export type priorityFilterType = "urgent" | "normal" | "low";
+export type SortType = "createdAt" | "updatedAt" | "priority";
+export type OrderType = "asc" | "desc";
+
 export interface GetTodosParams {
-	priorityFilter?: "urgent" | "normal" | "low";
+	priorityFilter?: priorityFilterType;
 	keyword?: string;
-	sort?: "createdAt" | "updatedAt";
-	order?: "asc" | "desc";
+	sort?: SortType;
+	order?: OrderType;
+	[key: string]: unknown;
 }

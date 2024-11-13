@@ -1,72 +1,47 @@
-import { useEffect } from "react";
-import { Outlet, useSearchParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-import { useDebounce } from "@/hooks/useDebounce";
+import { useQueryStrings } from "@/hooks/useQueryStrings";
 import { useGetTodos } from "@/hooks/apis/useGetTodos";
+import { useSearchKeyword } from "@/hooks/useSearchKeyword";
 
+import SearchInput from "./components/SearchInput";
 import PriorityFilterMenu from "./components/PriorityFilterMenu";
-import SortOrderMenu from "./components/SortOrderMenu";
 import AddTodoForm from "./components/AddTodoForm";
 import TodoList from "./components/TodoList";
 
-import { Flex, Box, VStack, Input, HStack } from "@chakra-ui/react";
-import { IoSearchOutline } from "react-icons/io5";
+import { OrderType, priorityFilterType, SortType } from "@/types/apis";
 
-import { GetTodosParams } from "@/types/apis";
-import { priorityType } from "@/types/todo";
+import { VStack, Box, HStack, Flex } from "@chakra-ui/react";
 
 const TodoListPage = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const { getParams, setParams } = useQueryStrings();
+	const { priorityFilter, sort, order } = getParams() as {
+		priorityFilter?: priorityFilterType;
+		sort?: SortType;
+		order?: OrderType;
+	};
+	const { register, debouncedKeyword } = useSearchKeyword();
+	const [currentSort, setCurrentSort] = useState<SortType | undefined>(sort);
+	const [currentOrder, setCurrentOrder] = useState<OrderType | undefined>(order);
 
-	const { register, watch } = useForm<{ keyword: string }>();
-	const keyword = watch("keyword");
-	const debouncedKeyword = useDebounce(keyword, 500);
-
-	useEffect(() => {
-		if (debouncedKeyword) {
-			searchParams.set("keyword", debouncedKeyword);
-		} else {
-			searchParams.delete("keyword");
-		}
-		setSearchParams(searchParams);
-	}, [debouncedKeyword, setSearchParams, searchParams]);
-
-	const handlePriorityChange = (priority: priorityType) => {
-		if (priority) {
-			searchParams.set("priority", priority);
-		} else {
-			searchParams.delete("priority");
-		}
-		setSearchParams(searchParams);
+	const handlePriorityChange = (newPriority: priorityFilterType) => {
+		setParams({ priorityFilter: newPriority });
 	};
 
-	const handleSortChange = (sort: string[]) => {
-		if (sort.length > 0) {
-			searchParams.set("sort", sort[0]);
-		} else {
-			searchParams.delete("sort");
-		}
-		setSearchParams(searchParams);
+	const handleSortChange = (sortKey: SortType) => {
+		const newOrder = currentSort === sortKey && currentOrder === "asc" ? "desc" : "asc";
+		setCurrentSort(sortKey);
+		setCurrentOrder(newOrder);
+		setParams({ sort: sortKey, order: newOrder });
 	};
 
-	const handleOrderChange = (order: string[]) => {
-		if (order.length > 0) {
-			searchParams.set("order", order[0]);
-		} else {
-			searchParams.delete("order");
-		}
-		setSearchParams(searchParams);
-	};
-
-	const params: GetTodosParams = {
+	const { todos } = useGetTodos({
+		priorityFilter,
+		sort: currentSort,
+		order: currentOrder,
 		keyword: debouncedKeyword,
-		priorityFilter: searchParams.get("priority") as "urgent" | "normal" | "low" | undefined,
-		sort: (searchParams.get("sort") as "createdAt" | "updatedAt") || undefined,
-		order: (searchParams.get("order") as "asc" | "desc") || undefined,
-	};
-
-	const { todos } = useGetTodos(params);
+	});
 
 	return (
 		<VStack
@@ -86,20 +61,13 @@ const TodoListPage = () => {
 
 			<VStack gap={4} maxWidth="600px" width="100%" flex={1} flexGrow={1}>
 				<HStack width="100%">
-					<IoSearchOutline size="20px" color="gray" />
-					<Input
-						{...register("keyword")}
-						placeholder="검색어를 입력하세요"
-						autoComplete="off"
-						variant="flushed"
-					/>
+					<SearchInput register={register("keyword")} />
 				</HStack>
 				<HStack width="100%" alignSelf="start" justifyContent="space-between">
 					<PriorityFilterMenu onFilterChange={handlePriorityChange} />
-					<SortOrderMenu onSortChange={handleSortChange} onOrderChange={handleOrderChange} />
 				</HStack>
 				<Box width="100%">
-					<TodoList todos={todos} />
+					<TodoList todos={todos} onSortChange={handleSortChange} order={currentOrder} />
 				</Box>
 				<Box width="100%">
 					<Outlet />

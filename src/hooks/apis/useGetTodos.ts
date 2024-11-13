@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTodos } from "@/apis/todo";
 import { GetTodosParams } from "@/types/apis";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "@/services/authService";
 
 export const useGetTodos = (params: GetTodosParams) => {
 	const { priorityFilter, keyword, sort, order } = params;
@@ -17,7 +17,7 @@ export const useGetTodos = (params: GetTodosParams) => {
 	const { data, isLoading } = useQuery({
 		queryKey,
 		queryFn: () => getTodos(params),
-		enabled: !!isAuthenticated,
+		enabled: !!isAuthenticated(),
 	});
 
 	return { todos: data?.data ?? [], isLoadingTodos: isLoading };

@@ -6,7 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoginSchema } from "@/schema/auth";
-import { login } from "@/lib/auth";
+import { login } from "@/services/authService";
 
 import { Card, Button, Fieldset, Input, Stack, Heading } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";

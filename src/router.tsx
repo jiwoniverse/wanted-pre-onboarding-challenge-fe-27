@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import type { LoaderFunctionArgs } from "react-router-dom";
-import { isAuthenticated } from "./lib/auth";
+import { isAuthenticated } from "@/services/authService";
 
 import App from "./App";
 

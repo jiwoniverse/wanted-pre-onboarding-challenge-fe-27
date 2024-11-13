@@ -24,7 +24,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 			console.error(error.message);
 			return { error: error.message };
 		}
-		console.error("Unexpected error:", error);
+		console.error("Unexpected login error:", error);
 		return { error: "알 수 없는 오류가 발생했습니다." };
 	}
 };
@@ -35,7 +35,7 @@ export const logout = (): Promise<{ success?: string; error?: string }> => {
 			localStorage.removeItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 			resolve({ success: "로그아웃 되었습니다." });
 		} catch (error) {
-			console.log("Unexpected error:", error);
+			console.log("Unexpected logout error:", error);
 			resolve({ error: "알 수 없는 오류가 발생했습니다." });
 		}
 	});
@@ -57,7 +57,7 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
 			console.error(error.message);
 			return { error: error.message };
 		}
-		console.error("Unexpected error:", error);
+		console.error("Unexpected signup error:", error);
 		return { error: "알 수 없는 오류가 발생했습니다." };
 	}
 };
