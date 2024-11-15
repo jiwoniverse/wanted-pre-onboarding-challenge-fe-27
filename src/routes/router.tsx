@@ -1,14 +1,16 @@
-import { Suspense } from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
 import type { LoaderFunctionArgs } from "react-router-dom";
 
 import { isAuthenticated } from "@/services/authService";
 
-import App from "./App";
-import { HomePage, LoginPage, SignUpPage, TodoListPage, TodoDetailPage } from "./pages";
+import App from "../App";
+import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
+import SignUpPage from "../pages/SignUpPage";
+import TodoListPage from "../pages/TodoListPage";
+import TodoDetailPage from "../pages/TodoDetailPage";
 
 import { PATH } from "@/constants/path";
-import Loading from "./components/common/Loading";
 
 // const privateRoutes = [PATH.TODO];
 const authRoutes = [PATH.LOGIN, PATH.SIGN_UP];
@@ -35,43 +37,23 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "",
-				element: (
-					<Suspense fallback={<Loading />}>
-						<HomePage />
-					</Suspense>
-				),
+				element: <HomePage />,
 			},
 			{
 				path: PATH.LOGIN,
-				element: (
-					<Suspense fallback={<Loading />}>
-						<LoginPage />
-					</Suspense>
-				),
+				element: <LoginPage />,
 			},
 			{
 				path: PATH.SIGN_UP,
-				element: (
-					<Suspense fallback={<Loading />}>
-						<SignUpPage />
-					</Suspense>
-				),
+				element: <SignUpPage />,
 			},
 			{
 				path: PATH.TODO,
-				element: (
-					<Suspense fallback={<Loading />}>
-						<TodoListPage />
-					</Suspense>
-				),
+				element: <TodoListPage />,
 				children: [
 					{
 						path: ":todoId",
-						element: (
-							<Suspense fallback={<Loading />}>
-								<TodoDetailPage />
-							</Suspense>
-						),
+						element: <TodoDetailPage />,
 					},
 				],
 			},

@@ -63,12 +63,15 @@ const TodoListPage = () => {
 				<HStack width="100%">
 					<SearchInput register={register("keyword")} />
 				</HStack>
+
 				<HStack width="100%" alignSelf="start" justifyContent="space-between">
 					<PriorityFilterMenu onFilterChange={handlePriorityChange} />
 				</HStack>
+
 				<Box width="100%">
 					<TodoList todos={todos} onSortChange={handleSortChange} order={currentOrder} />
 				</Box>
+
 				<Box width="100%">
 					<Outlet />
 				</Box>
